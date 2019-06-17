@@ -1,0 +1,260 @@
+<head>
+  <title>SocialBook</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+
+
+</head>
+
+
+<body>
+  <div class="container">
+   
+    {{> mainBody}}
+    {{> viewbook}}
+    
+  </div>
+</body>
+
+
+
+
+
+<template name="mainBody">
+<h1>SocialBook</h1>
+  <div class="col-6">
+    <div class="row">
+  {{> AddBook}}
+  </div>
+  </div>
+  <main role="main">
+    
+    <div class="album py-5 bg-light">
+      <div class="container">
+        
+        <div class="row">
+          {{#each AllBooks}}
+          <div class="col-md-4" id="{{_id}}"      >
+            <div  class="card mb-4 shadow-sm" >
+              <p class="card-text">{{Title}}</p>
+              <img class="imagebk" src='{{image}}' alt="temp photo">
+              <div class="card-body">
+                <p class="card-text">{{Author}}</p>
+                <p class="card-text">{{Description}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  
+                  <button type="button" class="btn btn-sm"><i class="zmdi zmdi-thumb-up js-like"></i></button>
+                  <h1 class="rateMe">{{like}}</h1>
+                  <button type="button" class="btn btn-sm"><i class="zmdi zmdi-thumb-down js-dislike"></i></button>
+                  <h1 class="rateMe">{{dislike}}</h1>
+                  
+
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary js-view">View</button>
+
+                   
+
+       
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+          </div> <!-- /col -->
+          {{/each}}
+        </div> <!-- /row for all cards -->
+
+      </div>
+    </div>
+
+  </main>
+</template>
+
+
+
+
+<template name="AddBook">
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary js-addbooks" data-toggle="modal" data-target="#exampleModal">
+  Add Book
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="AddBooksModal" tabindex="-1" role="dialog" aria-labelledby="AddBooksModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AddBooksModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        
+       <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon3">Image</span>
+  </div>
+  <input id="image" type="text" class="form-control" placeholder="image" aria-describedby="basic-addon3">
+</div>
+       
+       <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Title</span>
+  </div>
+  <input id="Title" type="text" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
+</div>
+
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Author</span>
+  </div>
+  <input id="Author" type="text" class="form-control" placeholder="Author" aria-label="Author" aria-describedby="basic-addon1">
+</div>
+
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Description</span>
+  </div>
+  <input id="Description" type="text" class="form-control" placeholder="Description" aria-label="Description" aria-describedby="basic-addon1">
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary js-save">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+
+
+
+<template name="editBook">
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-sm btn-outline-secondary js-editbooks" data-toggle="modal" data-target="#editBookModal">
+  Edit
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="editBookModal" tabindex="-1" role="dialog" aria-labelledby="editBookModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editBookModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        
+       <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon3">Image</span>
+  </div>
+  <input id="editimage" type="text" class="form-control" placeholder="Edit image" aria-describedby="basic-addon3">
+</div>
+       
+       <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Title</span>
+  </div>
+  <input id="editTitle" type="text" class="form-control" placeholder="Edit Title" aria-label="editTitle" aria-describedby="basic-addon1">
+</div>
+
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Author</span>
+  </div>
+  <input id="editAuthor" type="text" class="form-control" placeholder="Edit Author" aria-label="editAuthor" aria-describedby="basic-addon1">
+</div>
+
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Description</span>
+  </div>
+  <input id="editDescription" type="text" class="form-control" placeholder="Edit Description" aria-label="editDescription" aria-describedby="basic-addon1">
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary js-editsave">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+
+<template name="viewbook">
+  <!-- Modal -->
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="input-group-prepend">
+        <div class="input-group-text">
+          <button type="button" class="btn btn-sm btn-outline-secondary"><i  class="zmdi zmdi-delete zmdi-hc-2x js-delete"></i></button>
+          </div>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{#each AllBooks}}
+          <div class="col-md-12" id="{{_id}}"      >
+            <div  class="card mb-4 shadow-sm" >
+              <p class="card-text">{{Title}}</p>
+            
+        <div class="row">
+          <div class="col-12">
+              <img class="imagebk" src='{{image}}' alt="temp photo">
+              </div>
+            </div>
+              <div class="card-body">
+                <p class="card-text">{{Author}}</p>
+                <p class="card-text">{{Description}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="col">
+                  <button type="button" class="btn btn-sm"><i class="zmdi zmdi-thumb-up js-like"></i></button>
+                  <h1 class="rateMe">{{like}}</h1>
+                    </div>
+
+                  <div class="col">
+                  <button type="button" class="btn btn-sm"><i class="zmdi zmdi-thumb-down js-dislike"></i></button>
+                  <h1 class="rateMe">{{dislike}}</h1>
+                  
+                
+                   
+                  </div>
+
+                   {{> editBook}}
+
+
+                   
+                  
+                </div>
+              </div>
+           
+          </div> <!-- /col -->
+        </div>
+          {{/each}}
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+</template>
